@@ -9,10 +9,14 @@
     <string name="mensaje_menor">¡Lo siento, el número es menor!</string>
     <string name="pref_name_file">estadisticas</string>
     <string name="pref_aciertos">aciertos</string>
-    <string name="pref_errores">errores</string>
+    <string name="pref_intentos">intentos</string>
     <string name="pref_numero">número</string>
+    <string name="def_aciertos">aciertos</string>
+    <string name="def_intentos">intentos</string>
     <string name="aciertos">Aciertos:</string>
     <string name="intentos">Intentos:</string>
     <string name="media_intentos">Media intentos:</string>
     <string name="porcentaje_aciertos">Porcentaje aciertos:</string>
+    <string name="estadisticas">Estadísticas:</string>
+    <string name="mensaje_error">Debe introducir un numero:</string>
 </resources>
