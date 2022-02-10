@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">AdivinarNumero</string>
+    <string name="tv_enunciado">Adivina el numero que he generado entre 1 y 100</string>
+    <string name="btn_verificar">Verificar</string>
+    <string name="btn_retry">Volver a jugar</string>
+    <string name="et_numero">Introduce número</string>
+    <string name="mensaje_acierto">¡Enhorabuena, has acertado!</string>
+    <string name="mensaje_mayor">¡Lo siento, el número es mayor!</string>
+    <string name="mensaje_menor">¡Lo siento, el número es menor!</string>
+    <string name="pref_name_file">estadisticas</string>
+    <string name="pref_aciertos">aciertos</string>
+    <string name="pref_errores">errores</string>
+    <string name="pref_numero">número</string>
+</resources>
