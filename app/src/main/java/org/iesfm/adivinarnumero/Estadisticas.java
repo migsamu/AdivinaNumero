@@ -1,15 +1,12 @@
 package org.iesfm.adivinarnumero;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.Random;
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.text.DecimalFormat;
+import java.text.Format;
 
 public class Estadisticas extends AppCompatActivity {
 
@@ -18,8 +15,8 @@ public class Estadisticas extends AppCompatActivity {
     private TextView tvPorcentajeAciertos;
     private TextView tvMediaIntentos;
 
-    private int aciertos;
-    private int intentos;
+    private Integer aciertos;
+    private Integer intentos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +39,17 @@ public class Estadisticas extends AppCompatActivity {
         aciertos = getIntent().getIntExtra(MainActivity.ACIERTOS, 0);
         intentos = getIntent().getIntExtra(MainActivity.INTENTOS, 0);
 
-        String aciertosStr = String.valueOf(aciertos);
-        String intentosStr = String.valueOf(intentos);
+        tvAciertos.setText(aciertos.toString());
+        tvIntentos.setText(intentos.toString());
 
-        tvAciertos.setText(aciertosStr);
-        tvIntentos.setText(intentosStr);
+        DecimalFormat format = new DecimalFormat("#.00");
+
+
+        Double media = (Double.valueOf(intentos) / Double.valueOf(aciertos));
+        Double porcentaje = (Double.valueOf(aciertos) * 100 / Double.valueOf(intentos));
+
+        tvMediaIntentos.setText(format.format(media));
+        tvPorcentajeAciertos.setText(format.format(porcentaje) + "%");
+
     }
 }

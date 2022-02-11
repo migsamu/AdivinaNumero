@@ -18,8 +18,8 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-    protected final static String ACIERTOS = "org.iesfm.adivinarnumero.MainActivity";
-    protected final static String INTENTOS = "org.iesfm.adivinarnumero.MainActivity";
+    protected final static String ACIERTOS = "org.iesfm.adivinarnumero.MainActivity.aciertos";
+    protected final static String INTENTOS = "org.iesfm.adivinarnumero.MainActivity.intentos";
 
     private int numeroIntentos;
     private int numeroAciertos;
@@ -54,27 +54,40 @@ public class MainActivity extends AppCompatActivity {
         editor = pref.edit();
         editor.putInt(getString(R.string.pref_numero), numeroAleatorio);
         editor.commit();
+
+        numeroAciertos = pref.getInt(getString(R.string.pref_aciertos), 0);
+        numeroIntentos = pref.getInt(getString(R.string.pref_intentos), 0);
+
         btnRetry = (Button) findViewById(R.id.btnVolverAJugar);
         btnRetry.setVisibility(View.GONE);
     }
 
     public void validarNumero(View v) {
-        int numeroIntroducido = Integer.parseInt(etNumeroIntrodcucido.getText().toString());
-        if (pref.getInt(getString(R.string.pref_numero), numeroAleatorio) == numeroIntroducido) {
-            Toast.makeText(this, getString(R.string.mensaje_acierto), Toast.LENGTH_SHORT).show();
-            numeroAciertos++;
-            btnRetry.setVisibility(View.VISIBLE);
-        } else if (pref.getInt(getString(R.string.pref_numero), numeroAleatorio) > numeroIntroducido) {
-            Toast.makeText(this, getString(R.string.mensaje_mayor), Toast.LENGTH_SHORT).show();
-            numeroIntentos++;
+        String numIntroducido = etNumeroIntrodcucido.getText().toString();
+
+        if (numIntroducido.equals("")) {
+            Toast.makeText(this, getString(R.string.mensaje_error), Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, getString(R.string.mensaje_menor), Toast.LENGTH_SHORT).show();
-            numeroIntentos++;
+            int numeroIntroducido = Integer.parseInt(etNumeroIntrodcucido.getText().toString());
+            if (pref.getInt(getString(R.string.pref_numero), numeroAleatorio) == numeroIntroducido) {
+                Toast.makeText(this, getString(R.string.mensaje_acierto), Toast.LENGTH_SHORT).show();
+                numeroAciertos++;
+                editor.putInt(getString(R.string.pref_aciertos), numeroAciertos);
+                editor.commit();
+                btnRetry.setVisibility(View.VISIBLE);
+            } else if (pref.getInt(getString(R.string.pref_numero), numeroAleatorio) > numeroIntroducido) {
+                Toast.makeText(this, getString(R.string.mensaje_mayor), Toast.LENGTH_SHORT).show();
+                numeroIntentos++;
+                editor.putInt(getString(R.string.pref_intentos), numeroIntentos);
+                editor.commit();
+            } else {
+                Toast.makeText(this, getString(R.string.mensaje_menor), Toast.LENGTH_SHORT).show();
+                numeroIntentos++;
+            }
+            editor.putInt(getString(R.string.pref_intentos), numeroIntentos);
+            editor.commit();
+            etNumeroIntrodcucido.setText("");
         }
-        editor.putInt(getString(R.string.pref_aciertos), numeroAciertos);
-        editor.putInt(getString(R.string.pref_intentos), numeroIntentos);
-        editor.commit();
-        etNumeroIntrodcucido.setText("");
     }
 
     public void volverAJugar(View v) {
